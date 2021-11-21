@@ -56,5 +56,4 @@ void search(){
         fclose(fp2);
  }
 }
-void deletefile
 
