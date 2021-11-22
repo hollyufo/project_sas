@@ -41,20 +41,20 @@ void search()
  printf("\nEnter the Roll no you want to search  :");
  scanf("%d", &r);
  t = cincheck(r);
- if (avl == 0)
+ if (t == 0)
   printf("ID %d is not available in the file\n",r);
  else
  {
   fp2 = fopen("Record", "r");
   while (fread(&users, sizeof(users), 1, fp2))
   {
-   s = user.id;
+   s = users.id;
    if (s == r)
    {
     printf("\nRoll no : %s", users.id);
     printf("\nName    : %s", users.name);
-    printf("\nAccount number : %d ", users.accountn)
-    printf("\nBlanace    = %.2f\n", stud.balance);
+    printf("\nAccount number : %d ", users.accountn);
+    printf("\nBlanace  : %.2f\n", users.balance);
    }
   }
   fclose(fp2);
@@ -70,9 +70,9 @@ void update()
  printf("Enter Id to update the account :");
  scanf("%d", &r);
  t = cincheck(r);
- if (avl == 0)
+ if (t == 0)
  {
-  printf("Roll number %s is not Available in the file", r);
+  printf("Roll number %d is not Available in the file", r);
  }
  else
  {
@@ -80,7 +80,7 @@ void update()
   fpt = fopen("TempFile", "w");
   while (fread(&users, sizeof(users), 1, fpo))
   {
-   s = stud.rollno;
+   s = users.id;
    if (s != r)
     fwrite(&users, sizeof(users), 1, fpt);
    else
@@ -94,7 +94,7 @@ void update()
     {
     case 1:
      printf("Enter id:");
-     scanf("%s", &users.id);
+     scanf("%s", &users.id[50]);
      break;
     case 2:
      printf("Enter balance to a : ");
@@ -102,9 +102,9 @@ void update()
      break;
     case 3:
      printf("Enter Name: ");
-     scanf("%s", &users.name);
+     scanf("%s", &users.name[50]);
      printf("Enter id: ");
-     scanf("%s", &users.id);
+     scanf("%s", &users.id[50]);
      break;
     default:
      printf("Invalid Selection");
@@ -134,7 +134,7 @@ void sort()
  fpo = fopen("Record", "r");
  while (fread(&users, sizeof(users), 1, fpo))
  {
-  a[count] = stud.balance;
+  a[count] = users.balance;
   count++;
  }
  c = count;
@@ -196,9 +196,9 @@ int empty()
  return c;
 }
 // MAIN PROGRAM
+// MAIN PROGRAM
 void main()
 {
-
  int c, emp;
  do
  {
@@ -216,23 +216,27 @@ void main()
    insert();
    break;
   case 2:
-    emp = empty();
-    if (emp == 0)
-        printf("\nThe file is EMPTY\n");
+   emp = empty();
+   if (emp == 0)
+    printf("\nThe file is EMPTY\n");
    else
-        disp();
+    disp();
    break;
   case 3:
-   printf("\nThe file is EMPTY\n");
+   search();
    break;
   case 4:
-   printf("\nThe file is EMPTY\n");
+       printf("\nits not done still coding it\n");
    break;
   case 5:
-   printf("\nThe file is EMPTY\n");
+   update();
    break;
   case 6:
-    printf("\nThe file is EMPTY\n");
+   emp = empty();
+   if (emp == 0)
+    printf("\n The file is EMPTY\n");
+   else
+    sort();
    break;
   case 7:
    exit(1);
