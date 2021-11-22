@@ -126,8 +126,75 @@ void update()
   printf("RECORD UPDATED");
  }
 }
+// function to sort the records 
+void sort()
+{
+ int a[20], count = 0, i, j, t, c;
+ FILE *fpo;
+ fpo = fopen("Record", "r");
+ while (fread(&users, sizeof(users), 1, fpo))
+ {
+  a[count] = stud.balance;
+  count++;
+ }
+ c = count;
+ for (i = 0; i<count - 1; i++)
+ {
+  for (j = i + 1; j<count; j++)
+  {
+   if (a[i]>a[j])
+   {
+    t = a[i];
+    a[i] = a[j];
+    a[j] = t;
+   }
+  }
+ }
+ printf("Roll No.\tName\t\tMark\n\n");
+ count = c;
+ for (i = 0; i<count; i++)
+ {
+  rewind(fpo);
+  while (fread(&users, sizeof(users), 1, fpo))
+  {
+   if (a[i] == users.balance)
+    printf("\n %s\t\t %s \t\t %2f \t\t %d",users.id, users.name, users.balance, users.accountn);
+  }
 
+ }
+}
+//    FUNCTION TO CHECK GIVEN ROLL NO IS AVAILABLE //
+int cincheck(int rno)
+{
+ FILE *fp;
+ int c = 0;
+ fp = fopen("Record", "r");
+ while (!feof(fp))
+ {
+  fread(&users, sizeof(users), 1, fp);
 
+  if (rno == users.id)
+  {
+   fclose(fp);
+   return 1;
+  }
+ }
+ fclose(fp);
+ return 0;
+}
+
+//FUNCTION TO CHECK THE FILE IS EMPTY OR NOT
+
+int empty()
+{
+ int c = 0;
+ FILE *fp;
+ fp = fopen("Record", "r");
+ while (fread(&users, sizeof(users), 1, fp))
+  c = 1;
+ fclose(fp);
+ return c;
+}
 // MAIN PROGRAM
 void main()
 {
