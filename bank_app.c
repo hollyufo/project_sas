@@ -33,6 +33,101 @@ void disp()
     printf("  %s\t\t%s\t%d\t%.2f\n", users.id, users.name, users.accountn, users.balance);
     fclose(fp1);
 }
+//function to search the record
+void search()
+{
+ FILE *fp2;
+ int r, s, t;
+ printf("\nEnter the Roll no you want to search  :");
+ scanf("%d", &r);
+ t = cincheck(r);
+ if (avl == 0)
+  printf("ID %d is not available in the file\n",r);
+ else
+ {
+  fp2 = fopen("Record", "r");
+  while (fread(&users, sizeof(users), 1, fp2))
+  {
+   s = user.id;
+   if (s == r)
+   {
+    printf("\nRoll no : %s", users.id);
+    printf("\nName    : %s", users.name);
+    printf("\nAccount number : %d ", users.accountn)
+    printf("\nBlanace    = %.2f\n", stud.balance);
+   }
+  }
+  fclose(fp2);
+ }
+}
+//function to update ..
+void update()
+{
+ int t;
+ FILE *fpt;
+ FILE *fpo;
+ int s, r, ch;
+ printf("Enter Id to update the account :");
+ scanf("%d", &r);
+ t = cincheck(r);
+ if (avl == 0)
+ {
+  printf("Roll number %s is not Available in the file", r);
+ }
+ else
+ {
+  fpo = fopen("Record", "r");
+  fpt = fopen("TempFile", "w");
+  while (fread(&users, sizeof(users), 1, fpo))
+  {
+   s = stud.rollno;
+   if (s != r)
+    fwrite(&users, sizeof(users), 1, fpt);
+   else
+   {
+    printf("\n\t1. Update id number %d", r);
+    printf("\n\t2. Update the balance %d", r);
+    printf("\n\t3. Update both Name and id %d", r);
+    printf("\nEnter your choice:");
+    scanf("%d", &ch);
+    switch (ch)
+    {
+    case 1:
+     printf("Enter id:");
+     scanf("%s", &users.id);
+     break;
+    case 2:
+     printf("Enter balance to a : ");
+     scanf("%f", &users.balance);
+     break;
+    case 3:
+     printf("Enter Name: ");
+     scanf("%s", &users.name);
+     printf("Enter id: ");
+     scanf("%s", &users.id);
+     break;
+    default:
+     printf("Invalid Selection");
+     break;
+    }
+    fwrite(&users, sizeof(users), 1, fpt);
+   }
+  }
+  fclose(fpo);
+  fclose(fpt);
+  fpo = fopen("Record", "w");
+  fpt = fopen("TempFile", "r");
+  while (fread(&users, sizeof(users), 1, fpt))
+  {
+   fwrite(&users, sizeof(users), 1, fpo);
+  }
+  fclose(fpo);
+  fclose(fpt);
+  printf("RECORD UPDATED");
+ }
+}
+
+
 // MAIN PROGRAM
 void main()
 {
