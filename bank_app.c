@@ -10,7 +10,7 @@ struct student
  char firstname[30];
  float balance;
 }user;
-//    FUNCTION TO INSERT RECORDS TO THE FILE
+//    finction to add records
 void insert()
 {
  FILE *fp;
@@ -28,7 +28,7 @@ void insert()
  fwrite(&user, sizeof(user), 1, fp);
  fclose(fp);
 }
-//    FUNCTION TO DISPLAY RECORDS
+//    function to display the records
 void disp()
 {
  FILE *fp1;
@@ -38,7 +38,7 @@ void disp()
  printf("%d\t\t%i\t\t%s\t\t%s\t\t%.2f\n", user.id, user.accountn, user.lastname, user.firstname, user.balance);
  fclose(fp1);
 }
-//    FUNCTION TO CHECK GIVEN ROLL NO IS AVAILABLE //
+//    function o check if the cin is there //
 int avlrollno(int rno)
 {
  FILE *fp;
@@ -57,7 +57,7 @@ int avlrollno(int rno)
  fclose(fp);
  return 0;
 }
-//    FUNCTION TO SEARCH THE GIVEN RECORD
+//    function to search the record
 void search()
 {
  FILE *fp2;
@@ -85,7 +85,7 @@ void search()
   fclose(fp2);
  }
 }
-//    FUNCTION TO DELETE A RECORD
+//    Ffunction to deleted the record
 void deletefile()
 {
  FILE *fpo;
@@ -117,7 +117,7 @@ void deletefile()
  }
 
 }
-//    FUNCTION TO UPDATE THE RECORD
+//    function to updated the records
 void update()
 {
  int avl;
@@ -178,7 +178,7 @@ void update()
   printf("RECORD UPDATED");
  }
 }
-//    FUNCTION for operation diop and w
+//    function for operation diop and w
 void operation()
 {
  int avl;
@@ -241,7 +241,7 @@ void operation()
  }
 }
 
-//FUNCTION TO CHECK THE FILE IS EMPTY OR NOT
+//function to chek if the file is empty
 int empty()
 {
  int c = 0;
@@ -252,7 +252,7 @@ int empty()
  fclose(fp);
  return c;
 }
-/* FUNCTION TO SORT THE RECORD */
+/* Function to sort the record */
 void sort()
 {
  int a[20], count = 0, i, j, t, c;
