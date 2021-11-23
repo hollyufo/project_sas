@@ -33,7 +33,7 @@ void disp()
 {
  FILE *fp1;
  fp1 = fopen("Record", "r");
- printf("\nid  \taccountn \tfirst name \t last name \t balance\n\n");
+ printf("\nid  \taccountn \tlast name \t first name \t balance\n\n");
  while (fread(&user, sizeof(user), 1, fp1))
  printf("%d\t\t%i\t\t%s\t\t%s\t\t%.2f\n", user.id, user.accountn, user.lastname, user.firstname, user.balance);
  fclose(fp1);
@@ -297,7 +297,7 @@ int main()
  {
   printf("\n\t---Select your choice---------\n");
   printf("\n\t1. INSERT\n\t2. DISPLAY\n\t3. SEARCH");
-  printf("\n\t4. DELETE\n\t5. UPDATE\n\t6. OPERATION");
+  printf("\n\t4. DELETE\n\t5. UPDATE\n\t6. OPERATION \n\t8. SORT");
   printf("\n\t7. EXIT");
   printf("\n\n------------------------------------------\n");
   printf("\nEnter your choice:");
