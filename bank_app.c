@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 char cincheck();
 struct student
 {
@@ -53,7 +54,7 @@ void search()
   while (fread(&user, sizeof(user), 1, fp2))
   {
    s[30] = user.id;
-   if (s[30] == r[30])
+   if (strcmp(s[30], r[30]) == 0)
    {
     printf("\nRoll no = %s", user.id);
     printf("\nName    = %s", user.firstname);
@@ -72,7 +73,7 @@ char cincheck(char rno[30])
  {
   fread(&user, sizeof(user), 1, fp);
 
-  if (rno[30] === user.id)
+  if (strcmp(rno[30], user.id) == 0)
   {
    fclose(fp);
    return 1;
