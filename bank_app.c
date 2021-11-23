@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+char cincheck();
 struct student
 {
  char id[30];
@@ -36,7 +37,61 @@ void disp()
  printf("%s\t %i       \t %s      \t%s   \t%f\n", user.id, user.accountn, user.lastname, user.firstname, user.balance);
  fclose(fp1);
 }
+//    FUNCTION TO SEARCH THE GIVEN RECORD
+void search()
+{
+ FILE *fp2;
+ char r[50], s[50], avl[50];
+ printf("\nEnter the CIN you want to search  :");
+ scanf("%s", r);
+ avl[30] = cincheck(r);
+ if (avl[30] == 0)
+  printf("Roll No %s is not available in the file\n",r);
+ else
+ {
+  fp2 = fopen("Record", "r");
+  while (fread(&user, sizeof(user), 1, fp2))
+  {
+   s[30] = user.id;
+   if (s[30] == r[30])
+   {
+    printf("\nRoll no = %s", user.id);
+    printf("\nName    = %s", user.firstname);
+    printf("\nMark    = %.2f\n", user.balance);
+   }
+  }
+  fclose(fp2);
+ }
+}
+char cincheck(char rno[30])
+{
+ FILE *fp;
+ char c = 0;
+ fp = fopen("Record", "r");
+ while (!feof(fp))
+ {
+  fread(&user, sizeof(user), 1, fp);
 
+  if (rno[30] === user.id)
+  {
+   fclose(fp);
+   return 1;
+  }
+ }
+ fclose(fp);
+ return 0;
+}
+//FUNCTION TO CHECK THE FILE IS EMPTY OR NOT
+int empty()
+{
+ int c = 0;
+ FILE *fp;
+ fp = fopen("Record", "r");
+ while (fread(&user, sizeof(user), 1, fp))
+  c = 1;
+ fclose(fp);
+ return c;
+}
 // MAIN PROGRAM
 int main()
 {
@@ -60,7 +115,7 @@ int main()
        disp();
    break;
   case 3:
-        printf("\nits not done still coding it\n");
+      search();
    break;
   case 4:
        printf("\nits not done still coding it\n");
