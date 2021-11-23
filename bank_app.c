@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-struct costumer
+struct student
 {
  char id[30];
  int accountn;
@@ -13,15 +13,15 @@ void insert()
 {
  FILE *fp;
  fp = fopen("Record", "a");
- printf("Enter the Roll no   :");
+ printf("Enter the cin        :");
  scanf("%s", user.id);
  printf("Enter account number :  ");
- scanf("%f", &user.balance);
- printf("Enter the Name      :");
+ scanf("%i", &user.accountn);
+ printf("Enter the first Name :");
  scanf("%s", user.firstname);
-  printf("Enter the Name      :");
+  printf("Enter the last Name :");
  scanf("%s", user.lastname);
- printf("Enter the balance      :");
+ printf("Enter the balance    :");
  scanf("%f", &user.balance);
  fwrite(&user, sizeof(user), 1, fp);
  fclose(fp);
@@ -33,7 +33,7 @@ void disp()
  fp1 = fopen("Record", "r");
  printf("\nid  \taccountn \tfirst name \t last name \t balance\n\n");
  while (fread(&user, sizeof(user), 1, fp1))
- printf("%s\t %i    \t %s    \t%s     \t%.2f\n", user.id, user.accountn, user.lastname, user.firstname, user.balance);
+ printf("%s\t %i       \t %s      \t%s   \t%f\n", user.id, user.accountn, user.lastname, user.firstname, user.balance);
  fclose(fp1);
 }
 
