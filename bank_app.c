@@ -1,46 +1,42 @@
 #include<stdio.h>
-#include <stdlib.h>
-
-typedef struct coustumer{
-    char id[50];
-    char fname[50];
-    char lname[50];
-    int accountn;
-    float balance;
-}users;
-//function to insert info to the file 
+#include<stdlib.h>
+struct student
+{
+ char id[30];
+ int accountn;
+ char lastname[30];
+ char firstname[30];
+ float balance;
+}user;
+//    FUNCTION TO INSERT RECORDS TO THE FILE
 void insert()
 {
-    users foo;
-    // open file in append mode
-    FILE *fp;
-    fp = fopen("accounts.txt", "a");
-    // if file is not opened then exit
-    if (fp == NULL)
-    {
-        printf("Error in opening file");
-        exit(0);
-    }
-    // take user input
-    printf("Enter first Name : ");    
-    scanf("%s", foo.fname);
-    printf("Enter last Name : ");    
-    scanf("%s", foo.lname);
-    printf("Enter CIN number:");
-    scanf("%s", foo.id);
-    printf("Enter the account number : ");
-    scanf("%d", &foo.accountn);
-    printf("Enter the balance : ");
-    scanf("%f", &foo.balance);
-    // write data to file
-    fprintf(fp, "%s,%s,%s,%d,%f\n", foo.fname, foo.lname, foo.id, foo.accountn, foo.balance);
-    // close file
-    fclose(fp);
+ FILE *fp;
+ fp = fopen("Record", "a");
+ printf("Enter the Roll no   :");
+ scanf("%s", user.id);
+ printf("Enter account number :  ");
+ scanf("%f", &user.balance);
+ printf("Enter the Name      :");
+ scanf("%s", user.firstname);
+  printf("Enter the Name      :");
+ scanf("%s", user.lastname);
+ printf("Enter the balance      :");
+ scanf("%f", &user.balance);
+ fwrite(&user, sizeof(user), 1, fp);
+ fclose(fp);
 }
-//function to display accounts
+//    FUNCTION TO DISPLAY RECORDS
+void disp()
+{
+ FILE *fp1;
+ fp1 = fopen("Record", "r");
+ printf("\nid  \taccountn \tfirst name \t last name \t balance\n\n");
+ while (fread(&user, sizeof(user), 1, fp1))
+ printf("%s\t %i    \t %s    \t%s     \t%.2f\n", user.id, user.accountn, user.lastname, user.firstname, user.balance);
+ fclose(fp1);
+}
 
-
-// MAIN PROGRAM
 // MAIN PROGRAM
 int main()
 {
@@ -61,9 +57,10 @@ int main()
    insert();
    break;
   case 2:
+       disp();
    break;
   case 3:
-   printf("\nits not done still coding it\n");
+        printf("\nits not done still coding it\n");
    break;
   case 4:
        printf("\nits not done still coding it\n");
@@ -72,7 +69,7 @@ int main()
    printf("\nits not done still coding it\n");
    break;
   case 6:
-
+     printf("\nits not done still coding it\n");  
    break;
   case 7:
    exit(1);
