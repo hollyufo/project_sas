@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
+#include <stdio_ext.h>
 struct student
 {
  int id;
@@ -8,7 +9,8 @@ struct student
  char lastname[30];
  char firstname[30];
  float balance;
-}user;
+};
+struct student user;
 //    finction to add records
 void insert()
 {
@@ -26,6 +28,7 @@ void insert()
  scanf("%f", &user.balance);
  fwrite(&user, sizeof(user), 1, fp);
  fclose(fp);
+ __fpurge(stdin);
 }
 //    function to display the records
 void disp()
@@ -159,6 +162,7 @@ void update()
      break;
     default:
      printf("Invalid Selection");
+     __fpurge(stdin);
      break;
     }
     fwrite(&user, sizeof(user), 1, fpt);
@@ -220,6 +224,7 @@ void operation()
      user.balance = user.balance - t;
      break;
     default:
+    __fpurge(stdin);
      printf("Invalid Selection");
      break;
     }
@@ -251,7 +256,7 @@ int empty()
  fclose(fp);
  return c;
 }
-/* Function to sort the record */
+/* Function to sort the record from low to high*/
 void sort()
 {
  int a[20], count = 0, i, j, t, c;
@@ -259,7 +264,7 @@ void sort()
  fpo = fopen("Record", "r");
  while (fread(&user, sizeof(user), 1, fpo))
  {
-  a[count] = user.id;
+  a[count] = user.balance;
   count++;
  }
  c = count;
@@ -282,11 +287,66 @@ void sort()
   rewind(fpo);
   while (fread(&user, sizeof(user), 1, fpo))
   {
-   if (a[i] == user.id)
+   if (a[i] == user.balance)
     printf("\n%d\t\t %s \t\t %s \t\t %.2f \t\t%d",user.id, user.firstname, user.lastname , user.balance , user.accountn);
   }
 
  }
+}
+/* Function to sort the record from high to low */
+void sort2()
+{
+ int a[20], count = 0, i, j, t, c;
+ FILE *fpo;
+ fpo = fopen("Record", "r");
+ while (fread(&user, sizeof(user), 1, fpo))
+ {
+  a[count] = user.balance;
+  count++;
+ }
+ c = count;
+ for (i = 0; i<count - 1; i++)
+ {
+  for (j = i + 1; j<count; j++)
+  {
+   if (a[i]<a[j])
+   {
+    t = a[i];
+    a[i] = a[j];
+    a[j] = t;
+   }
+  }
+ }
+ printf("cin\t\tfirst Name\t\tlast name\t\tbalance\t\taccount number\t\t\n\n");
+ count = c;
+ for (i = 0; i<count; i++)
+ {
+  rewind(fpo);
+  while (fread(&user, sizeof(user), 1, fpo))
+  {
+   if (a[i] == user.balance)
+    printf("\n%d\t\t %s \t\t %s \t\t %.2f \t\t%d",user.id, user.firstname, user.lastname , user.balance , user.accountn);
+  }
+
+ }
+}
+void sorting(){
+  int option;
+  foo:
+  printf("chosse how to sort :\n1.from low to high \n2. from high to low\n");
+  scanf("%d",&option);
+  switch(option){
+    case 1:
+      sort();
+    break;
+    case 2:
+      sort2();
+    break;
+    default:
+    __fpurge(stdin);
+    goto foo;
+    break;
+  }
 }
 // MAIN PROGRAM
 int main()
@@ -326,10 +386,11 @@ int main()
    exit(1);
    break;
   case 8:
-    sort();
+    sorting();
     break;
   default:
    printf("\nYour choice is wrong\nPlease try again...\n");
+   __fpurge(stdin);
    break;
 
   }
