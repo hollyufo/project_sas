@@ -39,7 +39,7 @@ void disp()
  fclose(fp1);
 }
 //    function o check if the cin is there //
-int avlrollno(int rno)
+int cincheck(int rno)
 {
  FILE *fp;
  int c = 0;
@@ -64,7 +64,7 @@ void search()
  int r, s, avl;
  printf("\nEnter the cin you want to search  :");
  scanf("%d", &r);
- avl = avlrollno(r);
+ avl = cincheck(r);
  if (avl == 0)
   printf("cin %d is not available in the file\n",r);
  else
@@ -93,7 +93,7 @@ void deletefile()
  int r, s;
  printf("Enter the cin you want to delete :");
  scanf("%d", &r);
- if (avlrollno(r) == 0)
+ if (cincheck(r) == 0)
   printf("Roll no %d is not available in the file\n", r);
  else
  {
@@ -126,7 +126,7 @@ void update()
  int s, r, ch;
  printf("Enter cin number to update:");
  scanf("%d", &r);
- avl = avlrollno(r);
+ avl = cincheck(r);
  if (avl == 0)
  {
   printf("the cin %d is not Available in the file", r);
@@ -187,7 +187,7 @@ void operation()
  int s, r, ch;
  printf("Enter cin number to update:");
  scanf("%d", &r);
- avl = avlrollno(r);
+ avl = cincheck(r);
  if (avl == 0)
  {
   printf("the cin %d is not Available in the file", r);
