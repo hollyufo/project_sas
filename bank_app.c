@@ -60,11 +60,11 @@ int cincheck(int rno)
 void search()
 {
  FILE *fp2;
- int r, s, avl;
+ int r, s, cin1;
  printf("\nEnter the cin you want to search  :");
  scanf("%d", &r);
- avl = cincheck(r);
- if (avl == 0)
+ cin1 = cincheck(r);
+ if (cin1 == 0)
   printf("cin %d is not available in the file\n",r);
  else
  {
@@ -119,14 +119,14 @@ void deletefile()
 //    function to updated the records
 void update()
 {
- int avl;
+ int cin1;
  FILE *fpt;
  FILE *fpo;
  int s, r, ch;
  printf("Enter cin number to update:");
  scanf("%d", &r);
- avl = cincheck(r);
- if (avl == 0)
+ cin1 = cincheck(r);
+ if (cin1 == 0)
  {
   printf("the cin %d is not Available in the file", r);
  }
@@ -180,14 +180,14 @@ void update()
 //    function for operation diop and w
 void operation()
 {
- int avl;
+ int cin1;
  FILE *fpt;
  FILE *fpo;
  int s, r, ch;
  printf("Enter cin number to update:");
  scanf("%d", &r);
- avl = cincheck(r);
- if (avl == 0)
+ cin1 = cincheck(r);
+ if (cin1 == 0)
  {
   printf("the cin %d is not Available in the file", r);
  }
