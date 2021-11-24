@@ -93,7 +93,7 @@ void deletefile()
  printf("Enter the cin you want to delete :");
  scanf("%d", &r);
  if (cincheck(r) == 0)
-  printf("Roll no %d is not available in the file\n", r);
+  printf(Cin  %d is not available in the file\n", r);
  else
  {
   fpo = fopen("Record", "r");
